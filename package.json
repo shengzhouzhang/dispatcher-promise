@@ -1,0 +1,26 @@
+{
+  "name": "flex-dispatcher-promise",
+  "description": "flex dispatcher with promise",
+  "version": "1.0.0",
+  "engines": {
+    "node": "0.12.x"
+  },
+  "private": true,
+  "dependencies": {
+    "bluebird": "^2.9.30",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.1.0",
+    "gulp-clean": "^0.3.1",
+    "gulp-plumber": "^1.0.1",
+    "gulp-watch": "^4.2.4",
+    "lodash": "^3.9.3",
+    "run-sequence": "^1.1.1"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.5"
+  },
+  "scripts": {
+    "test": "mocha",
+    "postinstall": "gulp build"
+  }
+}
