@@ -1,6 +1,5 @@
 'use strict';
 
-var Promise     = require('bluebird');
 var assert      = require('assert');
 var debug       = console.log;
 var dispatcher  = require('../build/dispatcher');
