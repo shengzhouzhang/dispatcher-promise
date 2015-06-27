@@ -20,11 +20,13 @@ function removeHandler (action, handler) {
   _.remove(_handlers[action], fn => fn === handler);
 };
 
-function dispatch (action) {
+function dispatch (action, options) {
   debug(`dispatch ${action}`);
   return Promise.all(
     _.map(_handlers[action],
-      handler => handler(_.slice(arguments, 1))
+      handler => new Promise((resolve, reject) => {
+        return handler(resolve, reject, options);
+      })
     )
   )
   .then(results => {
