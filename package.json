@@ -1,6 +1,6 @@
 {
-  "name": "flex-dispatcher-promise",
-  "description": "flex dispatcher with promise",
+  "name": "dispatcher-promise",
+  "description": "dispatcher with promise",
   "version": "1.0.0",
   "engines": {
     "node": "0.12.x"

@@ -39,4 +39,26 @@ describe('Dispatcher', function () {
     .then(function () { done(); })
     .catch(function (err) { debug('err', err); });
   });
+
+  it('should throw errors', function () {
+    this.timeout(TIMEOUT);
+    try {
+      dispatcher.addHandler(handler_1);
+    } catch (err) {
+      debug(err.message);
+      assert(err instanceof dispatcher.InvalidAction);
+    }
+    try {
+      dispatcher.removeHandler(handler_1);
+    } catch (err) {
+      debug(err.message);
+      assert(err instanceof dispatcher.InvalidAction);
+    }
+    try {
+      dispatcher.dispatch(handler_1);
+    } catch (err) {
+      debug(err.message);
+      assert(err instanceof dispatcher.InvalidAction);
+    }
+  });
 });

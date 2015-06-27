@@ -8,20 +8,21 @@ let debug = Debug('dispatcher');
 
 function addHandler (action, handler) {
   debug(`add handler`);
-  if(typeof action !== 'string') { throw new Error ('invalid action type'); }
+  if(typeof action !== 'string') { throw new InvalidAction(); }
   if(!_handlers[action]) { _handlers[action] = []; }
   _handlers[action].push(handler);
 };
 
 function removeHandler (action, handler) {
   debug(`remove handler`);
-  if(typeof action !== 'string') { throw new Error ('invalid action type'); }
+  if(typeof action !== 'string') { throw new InvalidAction(); }
   if(!_handlers[action]) { return; }
   _.remove(_handlers[action], fn => fn === handler);
 };
 
 function dispatch (action, options) {
   debug(`dispatch ${action}`);
+  if(typeof action !== 'string') { throw new InvalidAction(); }
   return Promise.all(
     _.map(_handlers[action],
       handler => new Promise((resolve, reject) => {
@@ -36,4 +37,12 @@ function dispatch (action, options) {
   });
 };
 
-export default { addHandler, removeHandler, dispatch };
+class InvalidAction extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'InvalidAction';
+    this.message = message || 'invalid action type';
+  }
+}
+
+export default { addHandler, removeHandler, dispatch, InvalidAction };
