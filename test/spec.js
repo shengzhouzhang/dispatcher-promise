@@ -33,6 +33,7 @@ describe('Dispatcher', function () {
   it('should be able to remove handlers', function (done) {
     this.timeout(TIMEOUT);
     dispatcher.removeHandler(ACTION, handler_1);
+    dispatcher.removeHandler(ACTION, handler_2);
     dispatcher
     .dispatch(ACTION, { extra: true })
     .then(function () { done(); })
