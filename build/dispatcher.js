@@ -48,6 +48,9 @@ function dispatch(action, options) {
   if (typeof action !== 'string') {
     throw new InvalidAction();
   }
+  if (!_handlers[action]) {
+    return Promise.resolve();
+  }
   return Promise.all(_handlers[action].map(function (handler) {
     return new Promise(function (resolve, reject) {
       return handler(resolve, reject, options);

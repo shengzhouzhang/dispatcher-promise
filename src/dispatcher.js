@@ -25,6 +25,7 @@ function removeHandler (action, handler) {
 function dispatch (action, options) {
   debug(`dispatch ${action}`);
   if(typeof action !== 'string') { throw new InvalidAction(); }
+  if(!_handlers[action]) { return Promise.resolve(); }
   return Promise.all(
     _handlers[action].map(
       handler => new Promise((resolve, reject) => {
